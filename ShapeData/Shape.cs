@@ -6,10 +6,17 @@ using Color = System.Drawing.Color;
 
 namespace ShapeData
 {
+    /// <summary>
+    /// Holds the type of shape being used
+    /// </summary>
     public enum ShapeType 
     {
         Ellipse, Rectangle, Triangle
     }
+
+    /// <summary>
+    /// Holds shape information
+    /// </summary>
     public class Shape
     {
         public int[] Position;
@@ -49,6 +56,10 @@ namespace ShapeData
         {
         }
 
+        /// <summary>
+        /// Creates an Svg object of the shape
+        /// </summary>
+        /// <returns></returns>
         public SvgElement? ToSvg()
         {
             switch (this.Type)

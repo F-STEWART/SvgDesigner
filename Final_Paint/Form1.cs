@@ -26,18 +26,33 @@ namespace Final_Paint
 
         }
 
+        /// <summary>
+        /// Sets the Stroke colour
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void strokeColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
                 StrokeColour = colorDialog1.Color;
         }
 
+        /// <summary>
+        /// Sets the fill colour
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void fillColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (colorDialog2.ShowDialog() == DialogResult.OK)
                 FillColour = colorDialog2.Color;
         }
 
+        /// <summary>
+        /// Sets the type of shape to be drawn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (toolStripComboBox1.SelectedIndex)
@@ -54,6 +69,11 @@ namespace Final_Paint
             }
         }
 
+        /// <summary>
+        /// Clears all shapes in shapes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Shapes.Clear();
@@ -65,6 +85,9 @@ namespace Final_Paint
             undo();
         }
 
+        /// <summary>
+        /// Removes the last shape in the list
+        /// </summary>
         private void undo()
         {
             if (Shapes.Count > 0)
@@ -74,6 +97,11 @@ namespace Final_Paint
             pictureBox1.Invalidate();
         }
 
+        /// <summary>
+        /// Draws of objects in shapes to the picturebox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -122,6 +150,11 @@ namespace Final_Paint
 
         }
 
+        /// <summary>
+        /// Adds a shape to shapes when the user begins to drag one in the picturebox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Adds a shape
@@ -147,11 +180,21 @@ namespace Final_Paint
             }
         }
 
+        /// <summary>
+        /// Toggles whether the shape being drawn is filled
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void fillToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Fill = fillToolStripMenuItem.Checked;
         }
 
+        /// <summary>
+        /// Updates the size of a shape as the user moves their mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // These if statements are messy
@@ -184,12 +227,22 @@ namespace Final_Paint
             pictureBox1.Invalidate();
         }
 
+        /// <summary>
+        /// Updates "drawing" status when the user releases their mouse button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             IsDrawing = false;
             pictureBox1.Invalidate();
         }
 
+        /// <summary>
+        /// Creates an svg object for each shape in the list then writes them to a file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportSVGToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SvgDocument ExportDoc = new SvgDocument();
@@ -201,6 +254,9 @@ namespace Final_Paint
                 ExportDoc.Write(saveFileDialog1.FileName);
         }
 
+        /// <summary>
+        /// Bundles the shapes and serialises the bundle with json. Saves to a file.
+        /// </summary>
         private void save()
         {
             string json = JsonConvert.SerializeObject(new ShapeBundle(Shapes));
@@ -208,6 +264,9 @@ namespace Final_Paint
                 File.WriteAllText(saveFileDialog1.FileName, json);
         }
 
+        /// <summary>
+        /// Loads saved json shape data
+        /// </summary>
         private void load()
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
