@@ -171,7 +171,7 @@ namespace Final_Paint
                     Width = 0,
                     Height = 0,
                     StrokeColor = StrokeColour,
-                    StrokeThickness = toolStripComboBox2.SelectedIndex + 1,
+                    StrokeThickness = toolStripComboBox2.SelectedIndex + 1>0? toolStripComboBox2.SelectedIndex + 1:1,
                     FillColor = FillColour,
                     Fill = Fill,
                     Type = DrawMode
